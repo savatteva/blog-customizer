@@ -6,7 +6,15 @@ import { Text } from 'components/text';
 
 import styles from './Article.module.scss';
 
-export const Article = () => {
+type Article = {
+	fontColor?: string;
+	backgroundColor?: string;
+	contentWidthArr?: string;
+	fontFamily?: string;
+	fontSizeOption?: string;
+}
+
+export const Article = (style: Article) => {
 	return (
 		<article className={clsx(styles.article)}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>

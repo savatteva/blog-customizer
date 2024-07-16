@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import arrow from 'src/images/arrow.svg';
 import { ArticleParamsForm } from '../article-params-form';
@@ -10,10 +11,9 @@ export type OnClick = () => void;
 type ArrowButtonProps = {
 	isOpen?: boolean;
 	onClick: OnClick;
-	className?: string;
 }
 
-export const ArrowButton = ({onClick}: ArrowButtonProps) => {
+export const ArrowButton = ({onClick, isOpen}: ArrowButtonProps) => {
 
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
@@ -21,9 +21,9 @@ export const ArrowButton = ({onClick}: ArrowButtonProps) => {
 			role='button'
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
-			className={styles.container}
+			className={clsx(styles.container, isOpen ? styles.container_open : null)}
 			onClick={onClick}>
-			<img src={arrow} alt='иконка стрелочки' className={styles.arrow} />
+			<img src={arrow} alt='иконка стрелочки' className={clsx(styles.arrow, isOpen ? styles.arrow_open : null)} />
 		</div>
 	);
 };

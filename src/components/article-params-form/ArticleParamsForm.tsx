@@ -18,7 +18,7 @@ type ArticleParamsFormProps = {
 
 export const ArticleParamsForm = ({article, setArticle} : ArticleParamsFormProps) => {
 	const rootRef = useRef<HTMLFormElement>(null);
-	const [isOpen, setOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [state, setState] = useState(article)
 	const [fontFamily, setFontFamily] = useState(state.fontFamilyOption);
 	const [backgroundColor, setBackgroundColor] = useState(state.backgroundColor);
@@ -27,13 +27,13 @@ export const ArticleParamsForm = ({article, setArticle} : ArticleParamsFormProps
 	const [fontSize, setFontSize] = useState(state.fontSizeOption);
 
 	useOutsideClickClose({
-		isOpen: isOpen, 
+		isOpen: isMenuOpen, 
 		rootRef: rootRef, 
-		onChange: setOpen
+		onChange: setIsMenuOpen
 	})
 
 	const toggleClass = () => {
-		setOpen(!isOpen)
+		setIsMenuOpen(!isMenuOpen)
 	}
  
 	const handleSubmit = (e: FormEvent) => {
@@ -65,9 +65,9 @@ export const ArticleParamsForm = ({article, setArticle} : ArticleParamsFormProps
 
 	return (
 		<>
-			<ArrowButton onClick={toggleClass} isOpen={isOpen}/>
-			<aside className={clsx(styles.container, isOpen ? styles.container_open : null)}>
-			<ArrowButton onClick={toggleClass} isOpen={isOpen}/>
+			<ArrowButton onClick={toggleClass} isOpen={isMenuOpen}/>
+			<aside className={clsx(styles.container, isMenuOpen ? styles.container_open : null)}>
+			<ArrowButton onClick={toggleClass} isOpen={isMenuOpen}/>
 				<form className={styles.form} onSubmit={handleSubmit} ref={rootRef}>
 					<Text size={31} weight={800} uppercase>задайте параметры</Text>
 					<Select title={'шрифт'} options={fontFamilyOptions} selected={fontFamily} onChange={setFontFamily} />
